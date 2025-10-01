@@ -10,4 +10,21 @@ import com.example.duoc.ui.screen.ResumenScreen
 import com.example.duoc.viewmodel.UsuarioViewModel
 
 @Composable
-fun AppNavigation()
+fun AppNavigation() {
+    val navController = rememberNavController()
+
+    // Aqui creamos el ViewModel una sola vez
+    val usuarioViewModel: UsuarioViewModel = viewModel()
+
+    NavHost(
+        navController = navController,
+        startDestination = "registro"
+    ) {
+        composable("registro") {
+            RegistroScreen(navController, usuarioViewModel)
+        }
+        composable("resumen") {
+            ResumenScreen(usuarioViewModel)
+        }
+    }
+}
